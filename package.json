@@ -82,6 +82,7 @@
 		"rehype-stringify": "^10.0.1",
 		"remark-gfm": "^4.0.1",
 		"remark-math": "^6.0.0",
-		"remark-rehype": "^11.1.2"
+		"remark-rehype": "^11.1.2",
+		"svelte-themes": "^2.0.10"
 	}
 }

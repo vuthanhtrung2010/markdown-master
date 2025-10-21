@@ -11,6 +11,7 @@
 
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import ThemeToggle from '$lib/components/theme/ThemeToggle.svelte';
 
 	// Success dialog state
 	let showSuccessDialog = $state(false);
@@ -61,9 +62,12 @@
 </script>
 
 <div class="container mx-auto flex h-screen flex-col py-8">
-	<div class="mb-6">
-		<h1 class="text-3xl font-bold">Markdown Master – Local Demo</h1>
-		<p class="text-muted-foreground">Edit markdown and save/load using local storage</p>
+	<div class="mb-6 flex items-start justify-between">
+		<div>
+			<h1 class="text-3xl font-bold">Markdown Master – Local Demo</h1>
+			<p class="text-muted-foreground">Edit markdown and save/load using local storage</p>
+		</div>
+		<ThemeToggle />
 	</div>
 
 	<!-- Extra local actions -->
@@ -117,7 +121,8 @@
 			<Dialog.Description>Markdown has been saved to local storage.</Dialog.Description>
 		</Dialog.Header>
 		<Dialog.Footer class="mt-4 flex gap-2">
-			<Button variant="outline" onclick={() => (showSuccessDialog = false)}>Continue Editing</Button>
+			<Button variant="outline" onclick={() => (showSuccessDialog = false)}>Continue Editing</Button
+			>
 		</Dialog.Footer>
 	</Dialog.Content>
-	</Dialog.Root>
+</Dialog.Root>
