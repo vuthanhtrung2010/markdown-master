@@ -1,58 +1,115 @@
-# Svelte library
+# Markdown Master
 
-Everything you need to build a Svelte library, powered by [`sv`](https://npmjs.com/package/sv).
+A powerful, customizable Markdown editor and renderer built with Svelte 5. Featuring a split-pane live preview interface, formatting toolbar, theme switching, and local storage persistence.
 
-Read more about creating a library [in the docs](https://svelte.dev/docs/kit/packaging).
+## Features
 
-## Creating a project
+- **Real-time Preview**: Edit markdown and see the rendered output side-by-side
+- **Rich Formatting Toolbar**: Quick buttons for common markdown formatting
+- **Theme Support**: Toggle between light, dark, and system themes
+- **Local Storage**: Save your work locally and resume later
+- **Responsive Design**: Works on desktop and mobile with different layouts
+- **Math Support**: Render LaTeX equations with KaTeX
+- **Table Generator**: Easy markdown table creation
+- **Syntax Highlighting**: Code blocks with syntax highlighting
+- **Keyboard Shortcuts**: Power user shortcuts for common actions
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Getting Started
 
-```sh
-# create a new project in the current directory
-npx sv create
+### Prerequisites
 
-# create a new project in my-app
-npx sv create my-app
+- [Bun](https://bun.sh/) - Fast JavaScript runtime & package manager
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vuthanhtrung2010/markdown-master.git
+   cd markdown-master
+   ```
+
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+3. Build for production:
+   ```bash
+   bun run build
+   ```
+
+4. Preview the production build:
+   ```bash
+   bun run preview
+   ```
+
+## Project Structure
+
+```
+md-master/
+├── src/
+│   ├── lib/
+│   │   ├── components/
+│   │   │   ├── markdown-master/     # Core markdown editor components
+│   │   │   ├── theme/               # Theme components
+│   │   │   └── ui/                  # UI components (Shadcn Svelte)
+│   │   ├── markdown-processor.ts    # Markdown processing utilities
+│   │   └── remarkHeadingSeparator.ts  # Self-implemented remark plugin
+│   └── routes/                      # SvelteKit routes
+├── static/                          # Static assets
+├── components.json                  # Shadcn Svelte component definitions
+├── svelte.config.js                 # Svelte configuration
+├── vite.config.ts                   # Vite configuration
+└── package.json                     # Dependencies and scripts
 ```
 
-## Developing
+## Usage
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+### Basic Usage
 
-```sh
-npm run dev
+1. Open the app in your browser
+2. Start typing in the editor on the left
+3. See the rendered markdown on the right
+4. Use the formatting toolbar for common markdown elements
+5. Click "Save" to store your content in local storage
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+### Keyboard Shortcuts
+
+- `Ctrl+B` / `Cmd+B`: Bold text
+- `Ctrl+I` / `Cmd+I`: Italic text
+- `Ctrl+S` / `Cmd+S`: Save document to local storage
+- `Tab`: Insert 4 spaces
+
+## Customization
+
+The editor can be integrated into any Svelte 5 application:
+
+```svelte
+<script>
+  import MarkdownMaster from '$lib/components/markdown-master/MarkdownMaster.svelte';
+  
+  const config = {
+    title: 'My Document',
+    initialContent: '# Hello World',
+    placeholder: 'Start writing...'
+  };
+</script>
+
+<MarkdownMaster {config} />
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+## Technologies
 
-## Building
+- [Svelte 5](https://svelte.dev/) - Component framework with runes
+- [SvelteKit](https://kit.svelte.dev/) - Application framework
+- [TailwindCSS](https://tailwindcss.com/) - Styling
+- [Lucide Icons](https://lucide.dev/) - UI icons
+- [Rehype/Remark](https://github.com/rehypejs/rehype) - Markdown processing
 
-To build your library:
+## Contributing
 
-```sh
-npm pack
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-To create a production version of your showcase app:
+## License
 
-```sh
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```sh
-npm publish
-```
+This project is licensed under the MIT License - see the LICENSE file for details.
