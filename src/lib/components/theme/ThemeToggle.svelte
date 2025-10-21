@@ -94,16 +94,22 @@
 			>
 				<!-- Light theme icon -->
 				<Sun
-					class="h-4 w-4 scale-100 rotate-0 transition-all text-orange-500 dark:scale-0 dark:-rotate-90 {currentTheme === 'system' ? 'opacity-0' : ''}"
+					class="h-4 w-4 scale-100 rotate-0 text-orange-500 transition-all dark:scale-0 dark:-rotate-90 {currentTheme ===
+					'system'
+						? 'opacity-0'
+						: ''}"
 				/>
 				<!-- Dark theme icon -->
 				<Moon
-					class="absolute h-4 w-4 scale-0 rotate-90 transition-all text-blue-400 dark:scale-100 dark:rotate-0 {currentTheme === 'system' ? 'dark:opacity-0' : ''}"
+					class="absolute h-4 w-4 scale-0 rotate-90 text-blue-400 transition-all dark:scale-100 dark:rotate-0 {currentTheme ===
+					'system'
+						? 'dark:opacity-0'
+						: ''}"
 				/>
 				<!-- System theme icon (shown when system is active) -->
 				{#if currentTheme === 'system'}
 					<Monitor
-						class="absolute h-4 w-4 scale-100 transition-all text-purple-500 dark:text-purple-400"
+						class="absolute h-4 w-4 scale-100 text-purple-500 transition-all dark:text-purple-400"
 					/>
 				{/if}
 			</Button>
