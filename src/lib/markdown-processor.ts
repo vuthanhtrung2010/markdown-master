@@ -8,6 +8,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
+// import rehypeMinify from 'rehype-preset-minify';
 import { unified } from 'unified';
 
 import remarkHeadingSeparator from './remarkHeadingSeparator.js';
@@ -182,7 +183,7 @@ export async function processMarkdownToHtml(
 			.use(rehypeRaw)
 			.use(rehypeSanitize, {
 				...defaultSchema,
-				// customize what tags/attributes you allow
+				// Customize what tags/attributes you allow
 				attributes: {
 					...defaultSchema.attributes,
 					img: [
@@ -192,12 +193,18 @@ export async function processMarkdownToHtml(
 						['src'],
 						['title']
 					],
-					code: [...(defaultSchema.attributes?.code || []), ['className']]
+					code: [...(defaultSchema.attributes?.code || []), ['className']],
+					audio: [
+						...(defaultSchema.attributes?.audio || []),
+						['controls', 'style', 'title', 'data-media-type', 'data-media-id', 'loading']
+					],
+					source: [
+						...(defaultSchema.attributes?.source || []),
+						['src', 'type', 'data-media-type', 'data-media-id']
+					]
 				},
-				// Ensure <u> tag is allowed for underline support
-				tagNames: [...(defaultSchema.tagNames || []), 'u'].filter(
-					(tag, index, arr) => arr.indexOf(tag) === index
-				) // Remove duplicates
+				// Ensure <u>, <audio>, <source> tags are allowed
+				tagNames: [...new Set([...(defaultSchema.tagNames || []), 'u', 'audio', 'source'])]
 			})
 			.use(rehypeCustomStyleAndHeaders)
 			.use(rehypePrettyCode, {
@@ -206,6 +213,7 @@ export async function processMarkdownToHtml(
 				transformers
 			})
 			.use(rehypeKatex)
+			// .use(rehypeMinify)
 			.use(rehypeStringify, { allowDangerousHtml: true })
 			.process(preprocessed);
 
