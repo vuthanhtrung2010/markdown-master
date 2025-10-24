@@ -2,13 +2,11 @@ import { transformerCopyButton } from '@rehype-pretty/transformers';
 import rehypeKatex from 'rehype-katex';
 import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeRaw from 'rehype-raw';
-import rehypeSanitize, { defaultSchema } from 'rehype-sanitize';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
-// import rehypeMinify from 'rehype-preset-minify';
 import { unified } from 'unified';
 
 import remarkHeadingSeparator from './remarkHeadingSeparator.js';
@@ -181,31 +179,6 @@ export async function processMarkdownToHtml(
 			.use(remarkHeadingSeparator)
 			.use(remarkRehype, { allowDangerousHtml: true })
 			.use(rehypeRaw)
-			.use(rehypeSanitize, {
-				...defaultSchema,
-				// Customize what tags/attributes you allow
-				attributes: {
-					...defaultSchema.attributes,
-					img: [
-						...(defaultSchema.attributes?.img || []),
-						['className'],
-						['alt'],
-						['src'],
-						['title']
-					],
-					code: [...(defaultSchema.attributes?.code || []), ['className']],
-					audio: [
-						...(defaultSchema.attributes?.audio || []),
-						['controls', 'style', 'title', 'data-media-type', 'data-media-id', 'loading']
-					],
-					source: [
-						...(defaultSchema.attributes?.source || []),
-						['src', 'type', 'data-media-type', 'data-media-id']
-					]
-				},
-				// Ensure <u>, <audio>, <source> tags are allowed
-				tagNames: [...new Set([...(defaultSchema.tagNames || []), 'u', 'audio', 'source'])]
-			})
 			.use(rehypeCustomStyleAndHeaders)
 			.use(rehypePrettyCode, {
 				keepBackground: keepCodeBackground,
